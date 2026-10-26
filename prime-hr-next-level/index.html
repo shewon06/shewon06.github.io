@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123a2c">
+  <title>PRIME HR NEXT LEVEL | Workforce Platform</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="./config.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="loader" class="screen-loader"><div class="spinner"></div><p>Opening PRIME HR NEXT LEVEL...</p></div>
+<section id="setup-screen" class="auth-shell hidden">
+  <div class="auth-brand"><div class="logo-mark">P<span>✦</span></div><h1>PRIME <em>HR NEXT LEVEL</em></h1><p>People · Performance · Progress</p></div>
+  <div class="auth-card"><span class="eyebrow">CLOUD SETUP</span><h2>Connect your secure database</h2>
+    <p>This online application is published. To accept live employee data, configure Supabase Auth and the database first. No real HR records should be entered until setup is complete.</p>
+    <ol><li>Create your own Supabase project.</li><li>Run the supplied <code>schema.sql</code> in Supabase SQL Editor.</li><li>Set the project's URL and publishable key in <code>config.js</code> on GitHub.</li><li>Create your login and approve the first admin via the README instructions.</li></ol>
+    <a class="btn primary" href="https://github.com/shewon06/shewon06.github.io/tree/main/prime-hr-next-level">View setup files</a>
+  </div>
+</section>
+<section id="auth-screen" class="auth-shell hidden">
+  <div class="auth-brand"><div class="logo-mark">P<span>✦</span></div><h1>PRIME <em>HR NEXT LEVEL</em></h1><p>People · Performance · Progress</p><div class="auth-caption">A secure workforce hub for PRIME Agri Business &amp; Plantations</div></div>
+  <div class="auth-card">
+    <span class="eyebrow">STAFF ACCESS</span><h2 id="auth-title">Welcome back</h2><p>Sign in with your approved employee account.</p>
+    <form id="auth-form">
+      <label for="auth-name" id="name-wrap" class="hidden">Full name<input id="auth-name" autocomplete="name" maxlength="120"></label>
+      <label for="auth-email">Email address<input id="auth-email" type="email" autocomplete="email" required></label>
+      <label for="auth-password">Password<input id="auth-password" type="password" autocomplete="current-password" required minlength="8"></label>
+      <button class="btn primary wide" type="submit" id="auth-submit">Sign in</button>
+    </form>
+    <button id="toggle-auth" class="link-button">New employee? Request an account</button>
+    <p class="fineprint">Registration does not grant HR access. An administrator must approve every account.</p>
+  </div>
+</section>
+<section id="pending-screen" class="auth-shell hidden">
+  <div class="auth-brand"><div class="logo-mark">P<span>✦</span></div><h1>PRIME <em>HR NEXT LEVEL</em></h1><p>People · Performance · Progress</p></div>
+  <div class="auth-card"><span class="eyebrow">ACCOUNT REVIEW</span><h2>Awaiting HR approval</h2><p>Your account is registered, but access to private HR records remains blocked until an administrator enables it.</p><p id="pending-user" class="muted"></p><button class="btn" id="pending-logout">Sign out</button></div>
+</section>
+<div id="workspace" class="shell hidden">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="logo-mark small">P<span>✦</span></div><div><strong>PRIME</strong><small>HR NEXT LEVEL</small></div></div>
+    <div class="sidebar-caption">WORKSPACE</div>
+    <nav id="nav">
+      <button data-view="dashboard" class="nav-item active"><span>▦</span> Overview</button>
+      <button data-view="employees" class="nav-item hr-only"><span>♙</span> Employees</button>
+      <button data-view="attendance" class="nav-item"><span>◷</span> Attendance</button>
+      <button data-view="leave" class="nav-item"><span>▤</span> Leave requests</button>
+      <button data-view="recruitment" class="nav-item hr-only"><span>◈</span> Recruitment</button>
+      <button data-view="accounts" class="nav-item admin-only"><span>⚙</span> User access</button>
+      <div class="nav-divider"></div>
+      <button data-view="roadmap" class="nav-item"><span>✦</span> Future modules</button>
+    </nav>
+    <div class="sidebar-bottom"><span class="live-dot"></span> Secure cloud workspace <small id="side-role">Signed in</small></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><button class="mobile-nav btn outline" id="menu-toggle" aria-label="Toggle menu">☰</button><span class="crumb">PRIME / <b id="crumb-label">Overview</b></span></div><div class="top-actions"><span class="today" id="today-label"></span><span class="avatar" id="user-initial">P</span><span class="identity"><b id="user-name">Employee</b><small id="user-role">Employee</small></span><button class="btn outline" id="logout">Logout</button></div></header>
+    <div class="content">
+      <div class="page-header"><div><span class="eyebrow" id="page-eyebrow">MANAGEMENT CENTRE</span><h1 id="page-title">Workforce overview</h1><p id="page-subtitle">Live, permission-controlled people operations.</p></div><button class="btn outline" id="refresh">↻ Refresh</button></div>
+      <section id="view-dashboard" class="view">
+        <div class="metrics">
+          <div class="metric"><span>Active Employees</span><strong id="m-employees">—</strong><small>Directory records</small></div>
+          <div class="metric"><span>Present today</span><strong id="m-present">—</strong><small>Attendance check-ins</small></div>
+          <div class="metric"><span>Pending leave</span><strong id="m-leave">—</strong><small>Awaiting decision</small></div>
+          <div class="metric"><span>Recruitment</span><strong id="m-hiring">—</strong><small>Active candidates</small></div>
+        </div>
+        <div class="split"><article class="panel"><div class="panel-head"><h3>Welcome to your HR workspace</h3><span class="pill">LIVE DATA</span></div><p>The dashboard reads directly from your private Supabase database. Employees can only see their own permitted records; HR sees company operations.</p><div id="welcome-summary" class="tip"></div></article><article class="panel"><div class="panel-head"><h3>PRIME locations</h3></div><div id="branch-list" class="branch-list"></div></article></div>
+        <article class="panel"><div class="panel-head"><h3>Quick actions</h3></div><div class="quick-grid"><button data-go="attendance" class="quick">◷<b>Mark attendance</b><small>Record a secure check-in</small></button><button data-go="leave" class="quick">▤<b>Apply for leave</b><small>Track request status</small></button><button data-go="employees" class="quick hr-only">♙<b>Employee records</b><small>Manage staff directory</small></button></div></article>
+      </section>
+      <section id="view-employees" class="view hidden">
+        <div class="panel"><div class="panel-head"><h3>Employee directory</h3><button class="btn primary" id="employee-add">+ Add employee</button></div><div class="toolbar"><input id="employee-search" placeholder="Search by name, staff code, or branch"><button class="btn outline" id="employee-export">Export CSV</button></div><div class="table-scroll"><table><thead><tr><th>Staff code</th><th>Employee</th><th>Designation</th><th>Branch</th><th>Status</th><th></th></tr></thead><tbody id="employee-rows"></tbody></table></div></div>
+      </section>
+      <section id="view-attendance" class="view hidden">
+        <div class="split"><article class="panel"><div class="panel-head"><h3>My attendance</h3><span class="pill" id="attendance-state">NOT CHECKED IN</span></div><p id="attendance-info" class="muted">Attendance uses secure server timestamps (Sri Lanka local work date).</p><div class="button-row"><button class="btn primary" id="checkin">Check in</button><button class="btn outline" id="checkout">Check out</button></div><p class="fineprint">Location snapshots are not collected in this first release.</p></article><article class="panel"><div class="panel-head"><h3>Today's summary</h3></div><div id="attendance-summary" class="tip">Loading…</div></article></div>
+        <article class="panel"><div class="panel-head"><h3>Attendance records</h3></div><div class="table-scroll"><table><thead><tr><th>Employee</th><th>Work date</th><th>Check-in</th><th>Check-out</th><th>Mode</th></tr></thead><tbody id="attendance-rows"></tbody></table></div></article>
+      </section>
+      <section id="view-leave" class="view hidden">
+        <div class="split"><article class="panel"><div class="panel-head"><h3>New leave request</h3></div><form id="leave-form" class="form-grid"><label>Leave category<select name="kind" required><option>Annual</option><option>Casual</option><option>Medical</option><option>No-pay</option></select></label><div class="two"><label>From<input type="date" name="from_date" required></label><label>To<input type="date" name="to_date" required></label></div><label>Reason<textarea name="reason" maxlength="600" rows="3" required></textarea></label><button class="btn primary" type="submit">Submit request</button></form></article><article class="panel"><div class="panel-head"><h3>Approval process</h3></div><p>Requests are created with Pending status. Only an authorised HR user can approve or reject a request; the employee cannot modify the approval.</p><div class="tip">Leave balance and statutory entitlement calculations are scheduled for a subsequent phase and are not represented as approved balances here.</div></article></div>
+        <article class="panel"><div class="panel-head"><h3>Leave register</h3></div><div class="table-scroll"><table><thead><tr><th>Employee</th><th>Type</th><th>Dates</th><th>Status</th><th>Reason</th><th>Action</th></tr></thead><tbody id="leave-rows"></tbody></table></div></article>
+      </section>
+      <section id="view-recruitment" class="view hidden">
+        <article class="panel"><div class="panel-head"><h3>Candidate pipeline</h3><button class="btn primary" id="candidate-add">+ Add candidate</button></div><div class="table-scroll"><table><thead><tr><th>Candidate</th><th>Position</th><th>Branch</th><th>Stage</th><th>Notes</th><th></th></tr></thead><tbody id="candidate-rows"></tbody></table></div></article>
+      </section>
+      <section id="view-accounts" class="view hidden">
+        <article class="panel"><div class="panel-head"><h3>Account approvals &amp; roles</h3></div><p class="muted">Only administrators can approve new signups, change roles, or deactivate access. Use matching verified emails to associate employee profiles.</p><div class="table-scroll"><table><thead><tr><th>Email</th><th>Name</th><th>Role</th><th>Access</th><th>Action</th></tr></thead><tbody id="account-rows"></tbody></table></div></article>
+      </section>
+      <section id="view-roadmap" class="view hidden">
+        <div class="roadmap-grid">
+          <article class="panel"><span class="pill">NEXT PHASE</span><h3>Payroll &amp; Sri Lanka compliance</h3><p>EPF, ETF, APIT, overtime, bank formats, pay slip approval and audit trail. Do not use a prototype for salary disbursements.</p></article>
+          <article class="panel"><span class="pill">NEXT PHASE</span><h3>Letters &amp; documents</h3><p>Company-approved appointment templates, bulk issuance, signing, personnel documents and document acknowledgements.</p></article>
+          <article class="panel"><span class="pill">NEXT PHASE</span><h3>Sales performance &amp; KPI</h3><p>Region / zone structures, monthly business targets, monthly performance and regional leaderboards.</p></article>
+          <article class="panel"><span class="pill">NEXT PHASE</span><h3>Field workforce tools</h3><p>Mobile-friendly employee self-service, approved consent-based field check-in and controlled asset management.</p></article>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+<dialog id="employee-dialog" class="dialog"><form id="employee-form" class="dialog-body"><div class="panel-head"><h3 id="employee-modal-title">Employee</h3><button class="close" type="button" data-close="employee-dialog">✕</button></div><input type="hidden" name="id"><label>Staff code<input name="staff_code" required maxlength="40"></label><label>Full name<input name="full_name" required maxlength="180"></label><label>Email (must match a registered login to link)<input name="email" type="email" maxlength="254"></label><label>Designation<input name="designation" required maxlength="120"></label><label>Department<input name="department" maxlength="120"></label><label>Branch<select id="employee-branch" name="branch_id" required></select></label><label>Joining date<input name="joined_on" type="date"></label><label>Status<select name="status"><option value="active">Active</option><option value="on_leave">On leave</option><option value="exited">Exited</option></select></label><div class="button-row"><button class="btn primary" type="submit">Save employee</button><button type="button" class="btn outline" data-close="employee-dialog">Cancel</button></div></form></dialog>
+<dialog id="candidate-dialog" class="dialog"><form id="candidate-form" class="dialog-body"><div class="panel-head"><h3>Add candidate</h3><button class="close" type="button" data-close="candidate-dialog">✕</button></div><input type="hidden" name="id"><label>Candidate full name<input name="full_name" required maxlength="180"></label><label>Email<input type="email" name="email" maxlength="254"></label><label>Position<input name="position" required maxlength="160"></label><label>Branch<select id="candidate-branch" name="branch_id"></select></label><label>Stage<select name="stage"><option>Applied</option><option>Screening</option><option>Interview</option><option>Offer</option><option>Hired</option><option>Rejected</option></select></label><label>Notes<textarea name="notes" rows="3" maxlength="1000"></textarea></label><div class="button-row"><button class="btn primary" type="submit">Save candidate</button><button type="button" class="btn outline" data-close="candidate-dialog">Cancel</button></div></form></dialog>
+</body></html>
