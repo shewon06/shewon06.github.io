@@ -53,7 +53,7 @@
         const {error}=await state.client.auth.signUp({email,password,options:{data:{full_name}}});
         if(error) throw error;
         toast("Registration received. Check your email for confirmation and wait for administrator approval.");
-        state.signup=false; toggleAuth(); // revert to login
+        state.signup=true; toggleAuth(); // revert to login
         $("auth-form").reset();
       } else {
         const {error}=await state.client.auth.signInWithPassword({email,password});
@@ -154,7 +154,7 @@
     const email=formValue(f,"email").trim().toLowerCase();
     const linked=state.profiles.find(p=>p.email?.toLowerCase()===email);
     const previous=state.employees.find(x=>x.id===id);
-    const record={staff_code:formValue(f,"staff_code").trim(),full_name:formValue(f,"full_name").trim(),email:email||null,designation:formValue(f,"designation").trim(),department:formValue(f,"department").trim()||null,branch_id:formValue(f,"branch_id"),joined_on:formValue(f,"joined_on")||null,status:formValue(f,"status"),auth_user_id:linked?.id||previous?.auth_user_id||null};
+    const record={staff_code:formValue(f,"staff_code").trim(),full_name:formValue(f,"full_name").trim(),email:email||null,designation:formValue(f,"designation").trim(),department:formValue(f,"department").trim()||null,branch_id:formValue(f,"branch_id"),joined_on:formValue(f,"joined_on")||null,status:formValue(f,"status"),auth_user_id:linked?.id||((previous?.email||"").toLowerCase()===email?previous?.auth_user_id:null)||null};
     if(linked&&linked.id!==previous?.auth_user_id)toast("Registered account matched by email and linked to employee.");
     const q=id?state.client.from("employees").update(record).eq("id",id):state.client.from("employees").insert(record);
     const {error}=await q;
