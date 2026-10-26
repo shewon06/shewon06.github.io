@@ -1,0 +1,31 @@
+{
+  "id": "./",
+  "name": "PRIME HR NEXT LEVEL - Install Test",
+  "short_name": "PRIME HR Test",
+  "description": "Mobile installation test only. Not connected to staff records.",
+  "start_url": "./?launch=homescreen",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f8faf7",
+  "theme_color": "#143f32",
+  "orientation": "portrait-primary",
+  "lang": "en",
+  "categories": [
+    "business",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

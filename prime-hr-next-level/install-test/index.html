@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#143f32">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="PRIME HR Test">
+<meta name="description" content="PRIME HR NEXT LEVEL mobile install experience test - no real employee data.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="apple-touch-icon" sizes="192x192" href="./icon-192.png">
+<title>PRIME HR NEXT LEVEL · Mobile Test</title>
+<style>
+:root{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:#1d342c;background:#eff4ef;font-synthesis:none}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#eaf0ea}button,input,select,textarea{font:inherit}button{cursor:pointer}
+.shell{margin:0 auto;max-width:480px;min-height:100dvh;background:#f8faf7;position:relative;box-shadow:0 0 35px #1d30221a;padding-bottom:calc(94px + env(safe-area-inset-bottom))}
+.top{background:linear-gradient(145deg,#10392e,#205443);color:white;padding:calc(20px + env(safe-area-inset-top)) 23px 29px;border-radius:0 0 27px 27px;position:relative;overflow:hidden}
+.top:after{content:"";position:absolute;right:-55px;top:-60px;width:210px;height:210px;border:1px solid #dabb7850;border-radius:50%;pointer-events:none}
+.brand{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.logo{display:grid;place-items:center;border:1.5px solid #e3bf7c;color:#e8c984;background:#244e3e;font-size:18px;font-weight:900;letter-spacing:-2px;width:49px;height:49px;border-radius:14px}
+.brand b{font-size:17px;letter-spacing:.09em}.brand small{display:block;color:#d5bc81;font-size:10px;letter-spacing:.16em;margin-top:3px;font-weight:700}
+.topline{display:flex;align-items:center;justify-content:space-between;margin-top:26px;gap:10px;position:relative;z-index:1}
+.topline p{margin:0;color:#c8dfcf;font-size:13px}.topline h1{font-size:24px;letter-spacing:-.7px;margin:4px 0 0;line-height:1.15}
+.testchip{font-size:10px;color:#d7f9e5;background:#2c7054;padding:8px 11px;border-radius:999px;font-weight:800;letter-spacing:.08em;white-space:nowrap}
+.container{padding:21px 18px 8px}.view{display:none}.view.active{display:block}
+.note{display:flex;gap:10px;align-items:flex-start;background:#fff8eb;border:1px solid #efdfbb;color:#8b6325;padding:12px;border-radius:13px;font-size:12px;line-height:1.45;margin-bottom:16px}.note b{display:block;margin-bottom:3px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.stat{background:white;border-radius:15px;padding:16px;box-shadow:0 1px 8px #2445320b;border:1px solid #edf1ec;min-height:110px;display:flex;flex-direction:column;gap:9px}
+.stat .ic{font-size:20px}.stat b{font-size:18px;color:#164331}.stat small{font-size:11px;color:#829088;font-weight:600}
+.card{background:#fff;border:1px solid #e7ece6;border-radius:17px;padding:19px;margin-bottom:15px;box-shadow:0 2px 14px #163e2409}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:0 0 13px;gap:10px}.section-head h2{font-size:16px;letter-spacing:-.25px;margin:0}.section-head span{font-size:11px;color:#879a8e}.card p{line-height:1.6;margin:9px 0;color:#75887c;font-size:13px}
+.datebadge{display:inline-flex;background:#eef7f0;color:#226849;font-size:11px;padding:7px 10px;border-radius:20px;font-weight:700}
+.attime{font-size:29px;font-weight:850;color:#153f31;letter-spacing:-1px}.attime small{font-size:12px;font-weight:500;color:#788a7f;letter-spacing:normal;margin-left:7px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.btn{background:#164b37;color:#fff;font-weight:800;font-size:13px;border:1px solid #164b37;padding:13px 16px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:45px}
+.btn:disabled{background:#e6ebe6;color:#829086;border-color:#e6ebe6;cursor:default}.btn.secondary{background:#fff;color:#205342;border-color:#cddfd4}.btn.wide{width:100%}.btn.outline{background:transparent;color:#15543a;border:1px solid #b5cebe}
+.subheading{margin:23px 2px 12px;font-size:15px;font-weight:850;color:#264437}
+.tilegrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.tile{display:flex;align-items:center;gap:10px;padding:14px 12px;background:#fff;border:1px solid #e7efe7;border-radius:13px;font-weight:750;font-size:12px;text-align:left;color:#294736}
+.tile .ic{display:grid;place-items:center;width:34px;height:34px;font-size:17px;background:#ebf3ed;border-radius:10px}
+.profileline{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #edf0ec;font-size:13px}.profileline:last-child{border:0}.profileline span{color:#839287}.profileline b{font-size:12px;text-align:right}
+label{display:grid;gap:7px;color:#2a4a3a;font-size:12px;font-weight:750;margin:14px 0}
+input,select,textarea{padding:12px;width:100%;border:1px solid #dce7dc;background:#fff;border-radius:11px;color:#2a4a3a;outline:none;min-height:45px}
+input:focus,select:focus,textarea:focus{border-color:#75aa87}textarea{resize:vertical;min-height:78px}.split{display:grid;grid-template-columns:1fr 1fr;gap:11px}.muted{color:#859489;font-size:12px}.listrow{display:flex;gap:11px;align-items:flex-start;padding:13px 0;border-bottom:1px solid #edf1eb}.listrow:last-child{border:0}.listrow .round{display:grid;place-items:center;flex-shrink:0;width:39px;height:39px;border-radius:11px;background:#edf6ed;color:#2a7650;font-size:20px}.listrow .inner{flex:1;min-width:0}.listrow b{font-size:13px}.listrow p{margin:4px 0 0;font-size:12px}.pill{font-size:10px;padding:5px 8px;border-radius:50px;background:#fff2d8;color:#976b1e;font-weight:800;white-space:nowrap}.pill.green{background:#e4f4e9;color:#187746}
+.bottomnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);height:calc(72px + env(safe-area-inset-bottom));background:white;display:flex;justify-content:space-around;gap:3px;padding:7px 7px env(safe-area-inset-bottom);border-top:1px solid #e1e9e1;z-index:10;box-shadow:0 -4px 16px #1541240b}
+.nav{flex:1;border:0;background:transparent;color:#899b8e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:10px;font-weight:750;border-radius:12px}.nav .ni{font-size:23px;line-height:1}.nav.active{color:#155c3b;background:#eef7ef}
+.installstrip{background:#ebf4e9;border-radius:14px;border:1px solid #d1e5d2;padding:14px;margin:16px 0;display:flex;align-items:center;gap:10px}
+.installstrip span{font-size:23px}.installstrip b{display:block;font-size:12px}.installstrip small{display:block;font-size:11px;color:#668071;margin-top:4px}.installstrip button{border:0;background:#1b543b;color:white;font-weight:750;padding:10px 12px;border-radius:9px;font-size:11px;white-space:nowrap}
+dialog{border:0;border-radius:18px;padding:22px;width:calc(100% - 32px);max-width:410px;color:#284b37;box-shadow:0 15px 80px #193e3099}dialog::backdrop{background:#06190f88}dialog h2{margin:4px 0 13px}dialog ol{line-height:2;font-size:13px;padding-left:23px}dialog p{font-size:13px;line-height:1.6;color:#697f70}
+.toast{display:none;position:fixed;z-index:70;left:50%;bottom:calc(86px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(430px,calc(100% - 35px));background:#163f32;color:white;padding:13px 15px;border-radius:12px;text-align:center;font-size:12px;box-shadow:0 6px 25px #11311d35}
+.toast.show{display:block}
+@media(min-width:500px){body{padding:20px 0}.shell{border-radius:25px;overflow:hidden;min-height:calc(100dvh - 40px)}.bottomnav{bottom:0;border-radius:16px 16px 0 0}}
+</style></head><body>
+<div class="shell">
+ <header class="top">
+  <div class="brand"><div class="logo" aria-label="HR test icon">HR</div><div><b>PRIME</b><small>HR NEXT LEVEL</small></div></div>
+  <div class="topline"><div><p>Welcome,</p><h1>Demo Employee 👋</h1></div><span class="testchip">TEST MODE</span></div>
+ </header>
+ <main class="container">
+ <section id="home" class="view active">
+   <div class="note"><span>🧪</span><div><b>Installation test only</b>Dummy employee account. Nothing connects to the company HR database. Demo actions are saved only on this phone.</div></div>
+   <div class="installstrip"><span>📲</span><div style="flex:1"><b>Install PRIME HR Test</b><small>Phone Home Screen එකට දාගෙන බලන්න</small></div><button id="installBtn" type="button">Install</button></div>
+   <div class="grid2"><div class="stat"><span class="ic">🕘</span><div><b id="homeStatus">Not checked in</b><small style="display:block;margin-top:5px">Today's attendance</small></div></div><div class="stat"><span class="ic">📅</span><div><b id="homeLeave">0 requests</b><small style="display:block;margin-top:5px">Demo leave requests</small></div></div></div>
+   <article class="card"><div class="section-head"><h2>Today's attendance</h2><span id="todayLabel"></span></div>
+    <div class="row" style="margin:18px 0"><div><div class="attime" id="timeNow">--:--</div><small class="muted">Sri Lanka time</small></div><span class="datebadge" id="attendanceBadge">Not checked in</span></div>
+    <div class="row"><button id="homeIn" class="btn" data-attendance="in">● Check In</button><button id="homeOut" class="btn secondary" data-attendance="out">◯ Check Out</button></div>
+   </article>
+   <div class="subheading">Quick services</div><div class="tilegrid"><button class="tile" data-go="attendance"><span class="ic">🕒</span> Attendance</button><button class="tile" data-go="leave"><span class="ic">🏖️</span> Apply Leave</button><button class="tile" data-go="notices"><span class="ic">🔔</span> Notices</button><button class="tile" data-go="profile"><span class="ic">👤</span> My Profile</button></div>
+ </section>
+ <section id="attendance" class="view">
+  <div class="section-head"><h2>My Attendance</h2><span class="datebadge">TEST</span></div>
+  <article class="card"><p>Test the check-in/check-out buttons below. The times are generated on your device, not verified by the HR system.</p>
+   <div class="row" style="margin:16px 0"><span class="muted">Today's status</span><span class="datebadge" id="attendanceBadge2">Not checked in</span></div>
+   <div class="row"><button class="btn" data-attendance="in" id="pageIn">● Check In</button><button class="btn secondary" data-attendance="out" id="pageOut">◯ Check Out</button></div>
+  </article>
+  <article class="card"><div class="section-head"><h2>Recent activity</h2></div><div id="attendanceList" class="muted">No demo check-ins yet.</div></article>
+ </section>
+ <section id="leave" class="view">
+  <div class="section-head"><h2>Leave Requests</h2><span class="datebadge">TEST</span></div>
+  <article class="card"><p>Submit a sample leave request to test the mobile form. This does not go to HR.</p>
+   <form id="leaveForm"><label>Leave type<select name="type" required><option>Casual Leave</option><option>Annual Leave</option><option>Medical Leave</option></select></label>
+    <div class="split"><label>From<input name="from" type="date" required></label><label>To<input name="to" type="date" required></label></div>
+    <label>Reason (dummy text only)<textarea name="reason" maxlength="120" placeholder="Test request" required></textarea></label><button class="btn wide" type="submit">Submit Test Request</button>
+   </form>
+  </article>
+  <article class="card"><div class="section-head"><h2>Demo requests</h2></div><div id="leaveList"></div></article>
+ </section>
+ <section id="notices" class="view">
+  <div class="section-head"><h2>HR Notices</h2><span class="datebadge">TEST</span></div>
+  <article class="card"><div class="listrow"><span class="round">📢</span><div class="inner"><b>Welcome to PRIME HR NEXT LEVEL</b><p>This is a sample notification. Tap Acknowledge to test the action.</p><button id="ackBtn" class="btn secondary" type="button" style="margin-top:12px"></button></div></div></article>
+  <article class="card"><div class="listrow"><span class="round">✅</span><div class="inner"><b>Mobile app test</b><p>Install the app to your phone, close the browser, and open it again using the Home Screen icon.</p></div></div></article>
+ </section>
+ <section id="profile" class="view">
+  <div class="section-head"><h2>My Profile</h2><span class="datebadge">DEMO</span></div>
+  <article class="card"><div class="profileline"><span>Name</span><b>Demo Employee</b></div><div class="profileline"><span>Staff code</span><b>TEST001</b></div><div class="profileline"><span>Branch</span><b>Sample Branch</b></div><div class="profileline"><span>Account type</span><b>Local demo</b></div><div class="profileline"><span>Cloud connected</span><b>No</b></div></article>
+  <div class="note"><span>🔒</span><div><b>No real HR account</b>This test intentionally has no login, payroll, location tracking, or access to staff information. Never enter real employee information here.</div></div>
+  <button class="btn secondary wide" id="resetDemo" type="button">Reset Test Data</button>
+ </section>
+ </main>
+ <nav class="bottomnav" aria-label="Main navigation">
+  <button class="nav active" data-tab="home"><span class="ni">⌂</span>Home</button>
+  <button class="nav" data-tab="attendance"><span class="ni">◷</span>Attendance</button>
+  <button class="nav" data-tab="leave"><span class="ni">▤</span>Leave</button>
+  <button class="nav" data-tab="notices"><span class="ni">♧</span>Notices</button>
+  <button class="nav" data-tab="profile"><span class="ni">◉</span>Profile</button>
+ </nav>
+</div>
+<dialog id="installHelp"><h2>📲 Install PRIME HR Test</h2><div id="installSteps"></div><button id="closeHelp" class="btn wide">Got it</button></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>
+(()=>{"use strict";
+const $=id=>document.getElementById(id),KEY="prime_hr_install_test_v1";
+const fresh=()=>({attendance:{},leaves:[],ack:false});
+let data;try{data=JSON.parse(localStorage.getItem(KEY))||fresh()}catch(e){data=fresh()}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){notify("Storage unavailable; changes may not be saved.")}};
+const lkDate=()=>new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Colombo",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date()).replaceAll("/","-");
+const day=()=>{const d=new Date();return new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Colombo",weekday:"short",day:"2-digit",month:"short"}).format(d)};
+const clock=(ts)=>ts?new Date(ts).toLocaleTimeString("en-GB",{timeZone:"Asia/Colombo",hour:"2-digit",minute:"2-digit"}):"—";
+const escapeHTML=s=>String(s??"").replace(/[&<>"']/g,x=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[x]));
+let tm;const notify=(s)=>{const n=$("toast");n.textContent=s;n.classList.add("show");clearTimeout(tm);tm=setTimeout(()=>n.classList.remove("show"),3200)};
+function render(){
+  const today=lkDate(),a=data.attendance[today];
+  $("todayLabel").textContent=day();
+  $("timeNow").textContent=clock(new Date().toISOString());
+  const label=a?.out?"Completed":a?.in?"Checked in":"Not checked in";
+  $("homeStatus").textContent=label;$("homeLeave").textContent=data.leaves.length+" requests";
+  $("attendanceBadge").textContent=label;$("attendanceBadge2").textContent=label;
+  ["homeIn","pageIn"].forEach(id=>$(id).disabled=!!a?.in);
+  ["homeOut","pageOut"].forEach(id=>$(id).disabled=!a?.in||!!a?.out);
+  const entries=Object.entries(data.attendance).sort((a,b)=>b[0].localeCompare(a[0]));
+  $("attendanceList").innerHTML=entries.length?entries.map(([d,a])=>'<div class="listrow"><span class="round">🕒</span><div class="inner"><b>'+escapeHTML(d)+'</b><p>In: '+escapeHTML(clock(a.in))+' · Out: '+escapeHTML(clock(a.out))+'</p></div><span class="pill green">'+(a.out?"Done":"Active")+'</span></div>').join(""):'<p>No demo check-ins yet.</p>';
+  $("leaveList").innerHTML=data.leaves.length?data.leaves.slice().reverse().map(l=>'<div class="listrow"><span class="round">📅</span><div class="inner"><b>'+escapeHTML(l.type)+'</b><p>'+escapeHTML(l.from)+' to '+escapeHTML(l.to)+'</p><p>'+escapeHTML(l.reason)+'</p></div><span class="pill">Demo pending</span></div>').join(""):'<p class="muted">No test requests submitted yet.</p>';
+  $("ackBtn").textContent=data.ack?"✓ Acknowledged":"Acknowledge";
+  $("ackBtn").disabled=!!data.ack;
+}
+function nav(name){
+  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===name));
+  document.querySelectorAll(".nav").forEach(b=>b.classList.toggle("active",b.dataset.tab===name));
+  document.querySelector(".container").scrollIntoView({block:"start"});
+}
+document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>nav(b.dataset.tab)));
+document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>nav(b.dataset.go)));
+document.querySelectorAll("[data-attendance]").forEach(b=>b.addEventListener("click",()=>{
+  const d=lkDate(),what=b.dataset.attendance;
+  if(what==="in"){if(data.attendance[d]?.in)return notify("Already checked in today.");data.attendance[d]={in:new Date().toISOString(),out:null};notify("Demo check-in saved on this device.");}
+  else{if(!data.attendance[d]?.in||data.attendance[d]?.out)return notify("No active demo check-in.");data.attendance[d].out=new Date().toISOString();notify("Demo check-out saved on this device.");}
+  save();render();
+}));
+$("leaveForm").addEventListener("submit",e=>{
+  e.preventDefault();const f=new FormData(e.target),from=String(f.get("from")),to=String(f.get("to"));
+  if(to<from)return notify("End date must be after start date.");
+  data.leaves.push({type:String(f.get("type")),from,to,reason:String(f.get("reason")).slice(0,120)});
+  save();e.target.reset();render();notify("Demo leave request saved locally.");
+});
+$("ackBtn").addEventListener("click",()=>{data.ack=true;save();render();notify("Notice acknowledged (demo only).")});
+$("resetDemo").addEventListener("click",()=>{if(!confirm("Remove all local demo check-ins and requests?"))return;data=fresh();save();render();notify("Demo data reset.")});
+setInterval(()=>{$("timeNow").textContent=clock(new Date().toISOString())},30000);
+let installPrompt=null;
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;$("installBtn").textContent="Install";});
+window.addEventListener("appinstalled",()=>{installPrompt=null;$("installBtn").textContent="Installed";notify("Installed! Open PRIME HR Test from your Home Screen.")});
+const standalone=window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
+const isiOS=/iPhone|iPad|iPod/i.test(navigator.userAgent);
+if(standalone){$("installBtn").textContent="Installed";}
+$("installBtn").addEventListener("click",async()=>{
+  if(standalone){notify("Already running as installed app.");return}
+  if(installPrompt){const prompt=installPrompt;installPrompt=null;await prompt.prompt();const choice=await prompt.userChoice;if(choice.outcome==="accepted")notify("App added. Look for the HR icon.");else notify("You can install later from the browser menu.");return;}
+  $("installSteps").innerHTML=isiOS?
+    '<p><b>iPhone / Safari</b></p><ol><li>Open this page in Safari.</li><li>Tap the Share icon.</li><li>Choose Add to Home Screen.</li><li>Keep Open as Web App enabled; tap Add.</li></ol>':
+    '<p><b>Android / Chrome</b></p><ol><li>Open this page in Google Chrome.</li><li>Tap the three-dot menu ⋮.</li><li>Choose Install app or Add to Home screen.</li><li>Confirm Install / Add.</li></ol>';
+  $("installHelp").showModal();
+});
+$("closeHelp").addEventListener("click",()=>$("installHelp").close());
+$("installHelp").addEventListener("click",e=>{if(e.target===$("installHelp"))$("installHelp").close()});
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{scope:"./"}).catch(()=>{}))}
+render();
+})();
+</script></body></html>
